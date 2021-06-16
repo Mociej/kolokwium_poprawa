@@ -20,6 +20,13 @@ public class Product {
         this.name = name;
         this.productType = productType;
     }
+    public Product(Id aggregateId, Money price, String name, ProductType productType,ProductStatus status) {
+        this.id = aggregateId;
+        this.price = price;
+        this.name = name;
+        this.productType = productType;
+        this.status=status;
+    }
 
     public Id getId() {
         return id;

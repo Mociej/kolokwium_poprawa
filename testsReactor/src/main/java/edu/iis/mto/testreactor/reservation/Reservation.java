@@ -73,7 +73,7 @@ public class Reservation {
         return new Offer(availableItems, unavailableItems);
     }
 
-    private void addNew(Product product, int quantity) {
+    void addNew(Product product, int quantity) {
         ReservationItem item = new ReservationItem(product, quantity);
         items.add(item);
     }
