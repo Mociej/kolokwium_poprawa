@@ -1,5 +1,8 @@
 package edu.iis.mto.testreactor.reservation;
 
+import edu.iis.mto.testreactor.offer.Discount;
+import edu.iis.mto.testreactor.offer.DiscountPolicy;
+import edu.iis.mto.testreactor.offer.Offer;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,10 +28,18 @@ class ReservationTest {
     Date createDate;
 
     Reservation reservation;
+    @Mock
+    DiscountPolicy discountPolicy;
 
+    Discount discount;
+    Product product;
+    ReservationItem item;
+    Offer offer;
     @BeforeEach
     void setUp(){
         reservation=new Reservation(id,status,clientData,createDate);
+        //discountPolicy.applyDiscount(product, item.getQuantity(), product.getPrice());
+        offer=reservation.calculateOffer(discountPolicy);
     }
 
     @Test
@@ -37,8 +48,9 @@ class ReservationTest {
     }
 
     @Test
-    void test1(){
-
+    void calculateOfferShouldReturnListsWithZeroElements(){
+        assertEquals(0,offer.getAvailabeItems().size());
+        assertEquals(0,offer.getUnavailableItems().size());
     }
 
 }
