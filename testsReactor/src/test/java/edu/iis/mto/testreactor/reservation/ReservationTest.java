@@ -68,7 +68,7 @@ class ReservationTest {
         assertEquals(0,offer.getUnavailableItems().size());
     }
     @Test
-    void  calculateOfferShouldReturnListsWithOneAvaiableProduct(){
+    void  calculateOfferShouldReturnListsWithTwoAvaiableProduct(){
 //        OfferItem offerItem=new OfferItem(productData,1);
 //        OfferItem offerItem2=new OfferItem(productData,1);
         Product product=new Product(productId,price,PRODUCT_NAME,ProductType.STANDARD,ProductStatus.ACTIVE);
@@ -81,5 +81,17 @@ class ReservationTest {
 
         assertEquals(2,offer.getAvailabeItems().size());
         assertEquals(0,offer.getUnavailableItems().size());
+    }
+
+    @Test
+    void  calculateOfferShouldReturnListsWithTwoUnvaiableProduct(){
+        Product product=new Product(productId,price,PRODUCT_NAME,ProductType.STANDARD,ProductStatus.ARCHIVE);
+
+        reservation.addNew(product,1);
+        reservation.addNew(product,1);
+        offer=reservation.calculateOffer(discountPolicy);
+
+        assertEquals(0,offer.getAvailabeItems().size());
+        assertEquals(2,offer.getUnavailableItems().size());
     }
 }
